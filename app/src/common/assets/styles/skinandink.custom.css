@@ -1,0 +1,86 @@
+@import url(http://fonts.googleapis.com/css?family=Oswald);
+
+.loading{
+	margin-top:0px;
+}
+.loader-container{
+	border:none;
+	background-color: transparent;
+	width: 180px;
+	height: 180px;
+	margin-left: -90px;
+	margin-top: -90px;
+	box-shadow: none;
+}
+#loading > div.logoFull{
+	position: fixed;
+	width: 241px;
+	height:45px;
+	top:56%;
+	left: 50%;
+	margin-left: -120px;
+	margin-top: 4px;
+	z-index: 9;
+}
+.loader-svg{
+	margin-top: -51px;
+}
+.loader-svg p{
+  width:230px;
+  height: 10px;
+  font-size: 12px;
+  margin-left: 2px;
+  text-align: center;
+  color:#a7a7a7;
+}
+
+.hide{
+	display: none;
+}
+{
+
+}
+
+.big_thumb{
+	background-color:black;
+	margin-bottom: 10px;
+	margin-top:6px;
+	cursor: pointer;
+}
+.thumb{
+	border: 1px solid;
+}
+.thumb:hover,
+.big_thumb:hover{
+	opacity: 0.8;
+}
+
+.arrow,
+.circle_thumb,
+.thumb{
+	cursor: pointer;
+}
+
+.back_home{
+	cursor: pointer;
+	z-index: 9;
+}
+
+/* SLIDER ANIMATION */
+.w-slide.ng-hide-add,
+.w-slide.ng-hide-remove {
+  -webkit-transition: all linear 0.4s;
+  -moz-transition: all linear 0.4s;
+  -o-transition: all linear 0.4s;
+  transition: all linear 0.4s;
+  display: inline-block!important;
+}
+.w-slide.ng-hide-add.ng-hide-add-active,
+.w-slide.ng-hide-remove {
+  opacity: 0.6;
+}
+.w-slide.ng-hide-add,
+.w-slide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
+
