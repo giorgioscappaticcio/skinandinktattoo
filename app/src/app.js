@@ -5,7 +5,8 @@ angular.module('skinandInkApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngAnimate'
+  'ngAnimate',
+  'google-maps'
 
 ])
   .config(function ($routeProvider) {

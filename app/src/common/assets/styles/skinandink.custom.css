@@ -84,3 +84,6 @@
   opacity: 1;
 }
 
+/* GOOGLE MAP */
+.angular-google-map-container { height: 300px; }
+

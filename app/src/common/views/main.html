@@ -27,19 +27,25 @@
         <div class="w-row">
           <div class="w-col w-col-6">
             <h3>About:</h3>
-            <p class="fb_description"></p>
+            <p class="fb_description" ng-bind="infoObj.description"></p>
             <h3>Gallery:</h3>
             <div class="w-row gallery_thumb_left_col"></div>
           </div>
           <div class="w-col w-col-6">
             <h3>Info:</h3>
-            <p>Phone:&nbsp;<span class="fb_phone"></span>
+            <p>Phone:&nbsp;<strong><span class="fb_phone" ng-bind="infoObj.phone"></span></strong>
               <br>
               <br>Hours:&nbsp;<strong>Mon – Sat</strong>: 11:00 – 18:00
               <br>
-              <br>Address:<strong> <span class="fb_street"></span></strong>
+              <br>Address:<strong> <span class="fb_street" ng-bind="infoObj.location.street"></span></strong>
             </p>
-            <div class="w-widget w-widget-map map" data-widget-latlng="51.475268,-0.039217" data-widget-style="roadmap" data-widget-zoom="12" data-widget-tooltip="Skin&amp;Ink Tattoo Studio"></div>
+            <a href="" ng-click="refreshMap()">refresh</a>
+            <div id="map-canvas"></div>
+            <div class="w-widget w-widget-map">
+            <google-map center="map.center" zoom="map.zoom" draggable="map.draggable" control="map.control">
+              <marker coords="map.center" icon="map.icon"></marker>
+            </google-map>
+            </div>
           </div>
         </div>
       </div>

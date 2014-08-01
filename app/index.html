@@ -45,7 +45,7 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    
+    <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
     <!-- build:js scripts/vendor.js -->
     <!-- bower:js -->
     <script src="vendor/bower_components/jquery/dist/jquery.js"></script>
@@ -57,9 +57,11 @@
     <script src="vendor/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="vendor/bower_components/angular-route/angular-route.js"></script>
     <script src="vendor/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="vendor/bower_components/lodash/dist/lodash.compat.js"></script>
+    <script src="vendor/bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+    
         
         <!-- build:js({.tmp,app}) src/scripts.js -->
         <script src="src/app.js"></script>
@@ -67,6 +69,8 @@
         <script src="src/loading/directives/loading.js"></script>
         <script src="src/slider/directives/slider.js"></script>
         <script src="src/slider/controllers/slider.js"></script>
+        <script src="src/common/services/main.js"></script>
+        <script src="src/map/directives/map.js"></script>
         <!-- endbuild -->
 </body>
 </html>

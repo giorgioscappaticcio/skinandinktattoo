@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skinandInkApp')
-  .controller('SliderController', function ($scope) {
+  .controller('SliderController', function ($scope, CommonMain, $log) {
     $scope.images = [{
     	src: 'src/common/assets/images/001.jpg',
     	title: 'Homepage 1'
@@ -18,4 +18,6 @@ angular.module('skinandInkApp')
     	src: 'src/common/assets/images/005.jpg',
     	title: 'Homepage 5'
     }];
+
+    
  });
