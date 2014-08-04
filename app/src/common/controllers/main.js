@@ -7,7 +7,7 @@ angular.module('skinandInkApp')
   		latitude: 0,
   		longitude: 0
   	};
-
+  	
   	$scope.map = {
 		center: $scope.center,
 		zoom: 15,
@@ -36,6 +36,28 @@ angular.module('skinandInkApp')
   	});
 
   	
+  	CommonMain.getFBPhotos(10152187799888838).then( function(d) {
+  		// success
+  		
+  		if(d){
+  			$scope.photosObj = d.data;
+			$log.debug('photos', $scope.photosObj);
+			
+  		}
+  	}, function(d) {
+  		// request rejected (error)
+  		$scope.photosObj = {};
+  	});
+
+  	// I toggle the value of isVisible.
+    $scope.toggle = function(album) {
+
+        $scope.isVisible = ! $scope.isVisible;
+        $scope.fbAlbum = album;
+    };
+
+    // Default the blocks to be visible.
+    $scope.isVisible = false;
   	
 
   

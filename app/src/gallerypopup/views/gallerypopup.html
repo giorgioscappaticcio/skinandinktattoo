@@ -1,0 +1,17 @@
+<div id="imgGallery" class="animated" style="position: relative;">
+	<div id="grid-gallery" class="grid-gallery">
+		<section class="grid-wrap">
+			
+			<ul class="grid" style="position: relative; height: 720px;">
+				<li class="grid-sizer" style="position: absolute; left: 0px; top: 0px;"></li>
+				<li ng-repeat="photo in photosObjGallery">
+					<figure onclick="$('.levelUp').hide()">
+						<img src="{{photo.images[photo.images.length -1].source}}">
+					</figure>
+				</li>
+				<!-- for Masonry column width -->
+			</ul>
+		</section>
+	</div>
+	<div class="back_home animated" ng-click="toggle()">Go back</div>
+</div>

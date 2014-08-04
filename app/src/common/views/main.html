@@ -5,8 +5,8 @@
         <img src="src/common/assets/images/logo_skinandink.jpg" alt="535e119da768f6785e000973_logo_skinandink.jpg">
       </div>
       <div class="w-clearfix nav_desktop">
-        <a class="button" onClick="importHtml.init('gallery',0, true,'piercing')" href="#">BODY&nbsp;PIERCING</a>
-        <a class="button openFullBg" href="#">TATTOO</a>
+        <a class="button" ng-click="toggle('piercing')" href="">BODY&nbsp;PIERCING</a>
+        <a class="button openFullBg" href="">TATTOO</a>
       </div>
       <div class="w-clearfix nav_desktop_roght">
         <a class="button" href="#">BOOK NOW</a>
@@ -17,7 +17,7 @@
 
 
 
-  <div id="h" class="">
+  <div id="h" class="animated">
     <div class="section hero" ng-controller="SliderController">
       <slider images="images" />
     </div>
@@ -29,7 +29,11 @@
             <h3>About:</h3>
             <p class="fb_description" ng-bind="infoObj.description"></p>
             <h3>Gallery:</h3>
-            <div class="w-row gallery_thumb_left_col"></div>
+            <div class="w-row gallery_thumb_left_col">
+              <div class="w-col w-col-3" ng-repeat="photo in photosObj | limitTo: 4">
+                <div class="thumb thumb00_{{$index}}" style="background-image:url({{photo.images[photo.images.length -1].source}})" ng-click="toggle('studio')"></div>
+              </div>
+            </div>
           </div>
           <div class="w-col w-col-6">
             <h3>Info:</h3>
@@ -39,8 +43,6 @@
               <br>
               <br>Address:<strong> <span class="fb_street" ng-bind="infoObj.location.street"></span></strong>
             </p>
-            <a href="" ng-click="refreshMap()">refresh</a>
-            <div id="map-canvas"></div>
             <div class="w-widget w-widget-map">
             <google-map center="map.center" zoom="map.zoom" draggable="map.draggable" control="map.control">
               <marker coords="map.center" icon="map.icon"></marker>
@@ -51,6 +53,8 @@
       </div>
       <div></div>
     </div>
-
+    
   </div><!-- END home -->
-  
+
+  <!-- Image Gallery Popup -->
+ <div gallerypopup="isVisible" class="animated"></div>

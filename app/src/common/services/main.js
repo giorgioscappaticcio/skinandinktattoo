@@ -5,6 +5,7 @@ angular.module('skinandInkApp')
     
   	
   	
+
   	this.getData = function() {
 
   	  
@@ -37,6 +38,24 @@ angular.module('skinandInkApp')
 
 		return d.promise;
 	};
+
+  	this.getFBPhotos = function(fbAlbum){
+  		var fbInfoAPI = 'https://graph.facebook.com/'+fbAlbum+'/photos?limit=100';
+		var d = $q.defer();
+
+		$http({method: 'GET', url: fbInfoAPI}).
+			success(function(data, status, headers, config) {
+				var superData = data
+				return d.resolve(superData)
+			}).
+			error(function(data, status, headers, config) {
+				return d.reject('you got a problem');
+			});
+
+		return d.promise;
+	};
+
+	
 	
     
   });
