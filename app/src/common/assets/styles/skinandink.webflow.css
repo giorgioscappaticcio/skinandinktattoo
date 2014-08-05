@@ -437,25 +437,6 @@ p {
   margin-left: 0px;
   padding-left: 20px;
 }
-.back_home {
-  position: absolute;
-  top: 0px;
-  right: 6px;
-  z-index: 99;
-  width: 40px;
-  height: 40px;
-  padding-top: 10px;
-  background-color: #870000;
-  opacity: 0.7;
-  font-family: Oswald, sans-serif;
-  color: #ededed;
-  font-size: 20px;
-  font-weight: 400;
-  text-align: center;
-}
-.back_home:hover {
-  opacity: 1;
-}
 .footer_right_col {
   padding-top: 4px;
   text-align: right;

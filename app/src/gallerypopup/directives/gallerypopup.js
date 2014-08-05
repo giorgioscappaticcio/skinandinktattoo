@@ -1,12 +1,24 @@
 'use strict';
 
 angular.module('skinandInkApp')
-  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain) {
+  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain, $window) {
     return {
       templateUrl: 'src/gallerypopup/views/gallerypopup.html',
       restrict: 'AE',
       link: function link($scope, element, attrs, $log) {
       
+      	$scope.quantity = 5;
+      	$scope.windowHeight = (window.innerHeight - 80) + 'px';
+      	$scope.fullHeight = (window.innerHeight) + 'px';
+
+      	var windowEl = angular.element($window);
+      	var handler = function() {
+      	    $scope.scroll = (windowEl.scrollTop() - 70) + 'px';
+      	}
+      	windowEl.on('scroll', $scope.$apply.bind($scope, handler));
+      	handler();
+      	  
+
       	// I am the TRUTHY expression to watch.
       	var expression = attrs.gallerypopup;
 
@@ -40,12 +52,17 @@ angular.module('skinandInkApp')
 		  	}
 
 		  	if (fbAlbumId == 0) {
-		  		element.removeClass('slideInLeft').addClass('slideOutLeft');
+		  		// this controls the button to close the gallery
+		  		
+		  		$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
 		  		setTimeout(function(){
-		  			element.hide();
-		  			$('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
-		  		},600);
-		  		element.removeClass('slideInLeft').addClass('slideOutLeft');
+		  			element.removeClass('slideInLeft').addClass('slideOutLeft');
+		  			setTimeout(function(){
+		  				element.hide();
+		  				$('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
+		  			},600);
+		  		},200);
+		  		
 		  		return;
 		  	} else {
 		  		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
@@ -70,18 +87,39 @@ angular.module('skinandInkApp')
 			// Show element.
 			if ( newValue ) {
 				$('#h').removeClass('slideInLeft').addClass('slideOutLeft');
-				setTimeout(function(){
-					$('#h').hide();
-					element.show().removeClass('slideOutLeft').addClass('slideInLeft');
-				},600);
-				
+				imagesLoaded( document.querySelector('.grid-wrap'), function( instance ) {
+				  var allDone = true;
+				  if (allDone){
+				  	setTimeout(function(){
+				  		$('#h').hide();
+				  		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
+				  		new CBPGridGallery( document.getElementById( 'grid-gallery' ) );
+				  		setTimeout(function(){
+				  			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+				  		},200);	
+				  	},600);
+				  }
+				});
 			// Hide element.
 			} else {
 				if(element.is(":visible")){
-					element.removeClass('slideInLeft').addClass('slideOutLeft');
+					$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
 					setTimeout(function(){
-						element.removeClass('slideOutLeft').addClass('slideInLeft');
-					},600)
+						element.removeClass('slideInLeft').addClass('slideOutLeft');
+						imagesLoaded( document.querySelector('.grid-wrap'), function( instance ) {
+							var allDone = true;
+							if (allDone){
+								setTimeout(function(){
+									element.removeClass('slideOutLeft').addClass('slideInLeft');
+									new CBPGridGallery( document.getElementById( 'grid-gallery' ) );
+									setTimeout(function(){
+										$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+									},200);
+								},600);
+							}
+						});
+					},200);
+					
 				} else {
 					$('#h').removeClass('slideOutLeft').addClass('slideInLeft');
 					setTimeout(function(){

@@ -37,8 +37,52 @@
 .hide{
 	display: none;
 }
-{
+.back_home {
+  position: absolute;
+  top: 0px;
+  right: 6px;
+  z-index: 99;
+  padding: 10px;
+  background-color: #870000;
+  font-family: Oswald, sans-serif;
+  color: #ededed;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+.back_home:hover i {
+  	-webkit-animation: rotate 0.3s; /* Chrome, Safari, Opera */
+  	-webkit-animation-fill-mode: forwards;
+    animation: rotate 0.3s;
+    animation-fill-mode: forwards;
+}
 
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rotate {
+    from {
+    	transform:rotate(0deg);
+    	-ms-transform:rotate(0deg); /* IE 9 */
+    	-webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+    }
+    to {
+    	transform:rotate(-90deg);
+    	-ms-transform:rotate(-90deg); /* IE 9 */
+    	-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */
+    }
+}
+
+/* Standard syntax */
+@keyframes rotate {
+    from {
+    	transform:rotate(0deg);
+    	-ms-transform:rotate(0deg); /* IE 9 */
+    	-webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+    }
+    to {
+    	transform:rotate(-90deg);
+    	-ms-transform:rotate(-90deg); /* IE 9 */
+    	-webkit-transform:rotate(-90deg); /* Opera, Chrome, and Safari */
+    }
 }
 
 .big_thumb{
@@ -61,7 +105,7 @@
 	cursor: pointer;
 }
 
-.back_home{
+.back_home {
 	cursor: pointer;
 	z-index: 9;
 }
@@ -86,4 +130,19 @@
 
 /* GOOGLE MAP */
 .angular-google-map-container { height: 300px; }
+
+/* ICONS FONT AWESOME 4.1.0 */
+[class^="w-icon-"], [class*=" w-icon-"] {
+	font-family: 'FontAwesome';
+}
+.w-icon-slider-left:before {
+	content: "\f0d9";
+	color: #DCDCDC;
+	font-size: 30px;
+}
+.w-icon-slider-right:before {
+	content: "\f0da";
+	color: #DCDCDC;
+	font-size: 30px;
+}
 

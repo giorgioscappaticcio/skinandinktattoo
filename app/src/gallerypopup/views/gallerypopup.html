@@ -1,7 +1,6 @@
 <div id="imgGallery" class="animated" style="position: relative;">
 	<div id="grid-gallery" class="grid-gallery">
-		<section class="grid-wrap">
-			
+		<section class="grid-wrap" style="min-height:{{windowHeight}}">
 			<ul class="grid" style="position: relative; height: 720px;">
 				<li class="grid-sizer" style="position: absolute; left: 0px; top: 0px;"></li>
 				<li ng-repeat="photo in photosObjGallery">
@@ -12,6 +11,21 @@
 				<!-- for Masonry column width -->
 			</ul>
 		</section>
+		<section class="slideshow" style="height:{{fullHeight}}; top:{{scroll}}">
+			<ul>
+				<li ng-repeat="photo in photosObjGallery">
+					<figure>
+						<img src="{{photo.images[0].source}}" />
+					</figure> 
+				</li>
+			</ul>
+			<nav>
+				<span class="icon nav-prev"><i class="fa fa-caret-left"></i></span>
+				<span class="icon nav-next"><i class="fa fa-caret-right"></i></span>
+				<span class="icon nav-close"><i class="fa fa-times"></i></span>
+			</nav>
+			<div class="info-keys icon">Navigate with arrow keys</div>
+		</section>
 	</div>
-	<div class="back_home animated" ng-click="toggle()">Go back</div>
+	<div class="back_home animated slideOutUp" ng-click="toggle()"><i class="fa fa-times"></i></div>
 </div>

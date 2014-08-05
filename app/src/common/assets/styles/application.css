@@ -70,15 +70,23 @@
   border: 1px solid white;
 }
 .slideshow{
-    top: 0px !important;
+    /*top: 0px !important;*/
 }
 .slideshow nav span.nav-close{
   padding: 10px !important;
   color:white !important;
-  background-color: red !important;
+  background-color: #870000 !important;
   font-size: 24px;
   top: 0px;
+  position: absolute;
 } 
+
+.slideshow nav span.nav-close:hover i {
+    -webkit-animation: rotate 0.3s; /* Chrome, Safari, Opera */
+    -webkit-animation-fill-mode: forwards;
+    animation: rotate 0.3s;
+    animation-fill-mode: forwards;
+}
 
 /* Icon Navigation */
 #navIconRight > div {
