@@ -111,21 +111,32 @@
 }
 
 /* SLIDER ANIMATION */
-.w-slide.ng-hide-add,
-.w-slide.ng-hide-remove {
-  -webkit-transition: all linear 0.4s;
-  -moz-transition: all linear 0.4s;
-  -o-transition: all linear 0.4s;
-  transition: all linear 0.4s;
-  display: inline-block!important;
+.sliderGallery div.ng-hide-add,
+.w-slide.ng-hide-add {
+    opacity:1;
+
+    -webkit-transition:.5s ease all;
+    -moz-transition:.5s ease all;
+    -o-transition:.5s ease all;
+    transition:.5s ease all;
 }
-.w-slide.ng-hide-add.ng-hide-add-active,
-.w-slide.ng-hide-remove {
-  opacity: 0.6;
+.sliderGallery div.ng-hide-add.ng-hide-add-active,
+.w-slide.ng-hide-add.ng-hide-add-active {
+    opacity:0;
 }
-.w-slide.ng-hide-add,
-.w-slide.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
+.sliderGallery div.ng-hide-remove,
+.w-slide.ng-hide-remove {
+    -webkit-transition:.5s ease all;
+    -moz-transition:.5s ease all;
+    -o-transition:.5s ease all;
+    transition:.5s ease all;
+
+    display:block!important;
+    opacity:0;
+}
+.sliderGallery div, .sliderGallery div.ng-hide-remove.ng-hide-remove-active,
+.w-slide, .w-slide.ng-hide-remove.ng-hide-remove-active  {
+    opacity:1;
 }
 
 /* GOOGLE MAP */

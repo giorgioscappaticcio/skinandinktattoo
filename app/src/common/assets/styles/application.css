@@ -5,8 +5,6 @@
 	height: 100%;
 }
 
-
-
 .noisi{
     background-color: rgb(5, 5, 5);
     background-position: 50% 50%;
@@ -20,73 +18,84 @@
   background-repeat: repeat;
 }
 
-#closeFullBg, 
-.closeBtn,
-.levelUp{
-    background-color: red;
-    color: white;
-    position: fixed;
-    padding: 10px;
-    top: 0px;
-    right: 0px;
-    cursor:pointer;
-    z-index: 999;
-    font-family: 'icons';
-    font-size: 24px;
-}
 
-.levelUp{
-    top:0px;
-}
-
-#closeFullBg:before,
-.closeBtn:before{
-  content:"\f00d";
-}
-.levelUp:before{
-  content:"\f148";
-}
-.openFullBg{
-    cursor:pointer;
-}
-
-
-/* // Grid Gallery // */
-.grid-wrap{
-  background-image: url('../images/broken_noise.png');
-  background-position: 0% 0%;
-  background-size: auto;
-  background-repeat: repeat;
-}
-.slideshow figure{
-  background-color: black !important;
-}
-.grid-gallery .slideshow figure img{
-  width:auto !important;
+/* Slideshow Gallery */
+.sliderGallery div{
   height: 100%;
-  margin:0 auto;
+  position:relative;
+  background-size: cover;
+  background-position: center;
 }
-.grid-gallery .grid-wrap figure img{
-  border: 1px solid white;
+.arrowNav {
+    cursor: pointer;
+    display: block;
+    margin-top: -35px;
+    outline: medium none;
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    padding: 10px;
+    height: 70px;
+    color: #dcdcdc;
+    font-size: 30px;
 }
-.slideshow{
-    /*top: 0px !important;*/
+.arrowNav.prev {
+    left: 20px;
+    opacity: 0.9;
+    transition: all 0.2s linear 0s;
 }
-.slideshow nav span.nav-close{
-  padding: 10px !important;
-  color:white !important;
-  background-color: #870000 !important;
-  font-size: 24px;
-  top: 0px;
-  position: absolute;
-} 
+.arrowNav.next {
+    opacity: 0.9;
+    right: 20px;
+    transition: all 0.2s linear 0s;
+}
+.arrowNav.prev:hover{
+    opacity:1;
+}
+.arrowNav.next:hover{
+    opacity:1;
+}
 
-.slideshow nav span.nav-close:hover i {
-    -webkit-animation: rotate 0.3s; /* Chrome, Safari, Opera */
-    -webkit-animation-fill-mode: forwards;
-    animation: rotate 0.3s;
-    animation-fill-mode: forwards;
+.slideNav {
+    display: block;
+    margin: -20px auto 0;
+    padding: 1em 0 0.8em;
+    text-align: center;
+    width: 100%;
+    z-index: 5;
 }
+.slideNav li {
+    border: 2px solid #292929;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0 8px;
+    position: relative;
+    width: 50px;
+    overflow: hidden;
+    opacity: 0.3;
+}
+.slideNav li.active {
+    border: 2px solid #dcdcdc;
+    opacity: 1;
+}
+.slideNav li img {
+    width: 100%;
+}
+
+.sliderGallery {
+    border: 10px solid #292929;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+}
+.slideGallery {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 
 /* Icon Navigation */
 #navIconRight > div {
