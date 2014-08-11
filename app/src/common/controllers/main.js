@@ -50,14 +50,21 @@ angular.module('skinandInkApp')
   	});
 
   	// I toggle the value of isVisible.
-    $scope.toggle = function(album) {
+    $scope.toggleGallery = function(album) {
 
-        $scope.isVisible = ! $scope.isVisible;
+        $scope.galleryIsVisible = ! $scope.galleryIsVisible;
         $scope.fbAlbum = album;
     };
 
+    $scope.toggleTattoo = function() {
+      $scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+    };
+
     // Default the blocks to be visible.
-    $scope.isVisible = false;
+    $scope.galleryIsVisible = false;
+
+    $scope.singleTattooIsVisible = false;
+
   	
 
   

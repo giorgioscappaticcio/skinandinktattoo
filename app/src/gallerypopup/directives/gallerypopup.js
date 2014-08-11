@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('skinandInkApp')
-  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain, $window) {
+  .directive('gallerypopup', function ($templateCache, $document, $compile, $log, CommonMain, $window, $location) {
     return {
       templateUrl: 'src/gallerypopup/views/gallerypopup.html',
       restrict: 'AE',
       link: function link($scope, element, attrs, $log) {
       
+      	
+
       	$scope.photos = [];
 
       	// initial image index
