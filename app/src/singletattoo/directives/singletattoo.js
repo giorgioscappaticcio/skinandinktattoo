@@ -9,6 +9,8 @@ angular.module('skinandInkApp')
     	      
     	      	$scope.tattooPosition = 0;
 
+    	      	$scope.generalInfoLoaded = false;
+
     	      	$scope.thumbLimit = 6;
 
     	      	$scope.nextTattoo = function(){
@@ -68,7 +70,7 @@ angular.module('skinandInkApp')
     	      	
     	      	$scope.$watch('tattooPosition',function(oldValue, newValue){
 
-    	      		if (oldValue == 0){
+    	      		if (!$scope.generalInfoLoaded){
     	      			return;
     	      		} else {
     	      			$scope.updateFacebookCall();
@@ -121,6 +123,7 @@ angular.module('skinandInkApp')
 						$scope.tattooProfilePic = [];
 						// reset tattoo position
 						$scope.tattooPosition = 0;
+						$scope.generalInfoLoaded = true;
 						$scope.createTattooThumb();
 						$scope.updateFacebookCall();
 						$scope._Index = 0;

@@ -36,8 +36,7 @@ angular.module('skinandInkApp')
     $scope.singleTattooIsVisible = false;
 
     CommonMain.getData().then( function(d) {
-      // success
-      //$scope.photos = [];
+      
       if(d){
         console.log(d);
         $scope.globalInfo = d;

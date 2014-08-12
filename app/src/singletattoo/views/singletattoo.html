@@ -11,8 +11,11 @@
     <div class="icon_nav_section" id="profile_icon_nav">
       <div class="arrow left hide" id="left_arrow">&lt;</div>
       <div class="w-container icon_nav">
-      	<div class="circle_thumb selected" ng-click="goToTattoo($index)" ng-repeat="profilePicUrl in tattooProfilePic track by $index | orderBy:'id'">
-      		<img src="{{profilePicUrl.url}}" />
+      	<!-- <div class="circle_thumb" ng-click="goToTattoo($index)" ng-repeat="profilePicUrl in tattooProfilePic track by $index | orderBy:'id'" ng-class="{'selected': $index == tattooPosition}">
+      		<!-- <img src="{{profilePicUrl.name}}" /> --> 
+      	<!--/div> -->
+      	<div class="circle_thumb" ng-repeat="profilePicUrl in tattooProfilePic | orderBy:'id'" ng-click="goToTattoo(profilePicUrl.id - 1)" ng-class="{'selected': tattooPosition == profilePicUrl.id - 1}">
+      		<img src="{{profilePicUrl.url}}"/>
       	</div>
       </div>
       <div class="arrow right" id="right_arrow" ng-click="nextTattoo()">&gt;</div>
