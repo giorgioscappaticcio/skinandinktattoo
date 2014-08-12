@@ -4,26 +4,33 @@
     <div class="single_header" id="single_header">
       <div class="back_home animated slideOutUp" ng-click="toggleTattoo('close')"><i class="fa fa-times"></i></div>
       <div class="w-container fb_header">
-        <img class="fb_header_img" src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-xfa1/t31.0-8/q73/s720x720/1939798_1412200795702536_1717412926_o.jpg" alt="" style="top: 0px; height: 316px;">
+        <img class="fb_header_img" src="{{singleTattoInfoObj.cover.source}}" alt="">
       </div>
     </div>
 
     <div class="icon_nav_section" id="profile_icon_nav">
       <div class="arrow left hide" id="left_arrow">&lt;</div>
-      <div class="w-container icon_nav"><div class="circle_thumb selected"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/c50.0.200.200/p200x200/1146539_1412200229035926_1834858706_n.jpg?oh=dfb8999767fe4a2bcf9f25fc39cace46&amp;oe=5448C5A1&amp;__gda__=1413813417_a1abcaa3cf81d31e7846bb22d81e1f34"></div><div class="circle_thumb" onclick="importHtml.init('single_tattoo', 1)"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/t1.0-1/p200x200/10491251_1438110349794332_7041888808292395283_n.jpg"></div><div class="circle_thumb" onclick="importHtml.init('single_tattoo', 2)"><img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/t1.0-1/c0.0.200.200/p200x200/10369746_1511174679104194_2869793550639849925_n.jpg"></div></div>
-      <div class="arrow right" id="right_arrow" onclick="importHtml.init('single_tattoo', 1)">&gt;</div>
+      <div class="w-container icon_nav">
+      	<div class="circle_thumb selected" ng-click="goToTattoo($index)" ng-repeat="profilePicUrl in tattooProfilePic track by $index | orderBy:'id'">
+      		<img src="{{profilePicUrl.url}}" />
+      	</div>
+      </div>
+      <div class="arrow right" id="right_arrow" ng-click="nextTattoo()">&gt;</div>
     </div>
 
     <div class="section" id="single">
       <div class="w-container">
         <div class="w-row">
           <div class="w-col w-col-5 left_col">
-            <h1>Odge</h1>
-            <p>xxx</p>
+            <h1>{{singleTattoInfoObj.name}}</h1>
+            <p>{{singleTattoInfoObj.about}}</p>
           </div>
           <div class="w-col w-col-7 right_col">
             <h3 class="gallery_title">Gallery:</h3>
-            <div id="photoContainer"><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://scontent-a.xx.fbcdn.net/hphotos-xpf1/l/t1.0-9/10489815_1453034624952486_3492111475257852405_n.jpg" style="background-image:url(https://scontent-a.xx.fbcdn.net/hphotos-xpf1/l/t1.0-9/p75x225/10489815_1453034624952486_3492111475257852405_n.jpg)"></div><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://scontent-a.xx.fbcdn.net/hphotos-xap1/t1.0-9/10483123_1453034214952527_20485592222138573_n.jpg" style="background-image:url(https://scontent-a.xx.fbcdn.net/hphotos-xap1/t1.0-9/p75x225/10483123_1453034214952527_20485592222138573_n.jpg)"></div><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://scontent-a.xx.fbcdn.net/hphotos-xpa1/t1.0-9/10481864_1446814572241158_5673783391183611167_n.jpg" style="background-image:url(https://scontent-a.xx.fbcdn.net/hphotos-xpa1/t1.0-9/p75x225/10481864_1446814572241158_5673783391183611167_n.jpg)"></div><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10492046_1446814548907827_910247317833098609_n.jpg" style="background-image:url(https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/p75x225/10492046_1446814548907827_910247317833098609_n.jpg)"></div><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://scontent-b.xx.fbcdn.net/hphotos-xap1/t1.0-9/10441271_1446814518907830_1830588261958842689_n.jpg" style="background-image:url(https://scontent-b.xx.fbcdn.net/hphotos-xap1/t1.0-9/p75x225/10441271_1446814518907830_1830588261958842689_n.jpg)"></div><div onclick="importHtml.init('gallery')" class="big_thumb" fblink="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/10462682_1446814502241165_4923098771471614845_n.jpg?oh=dc0863f05f7b572e37f8a282ba99ad35&amp;oe=5448DC6E&amp;__gda__=1414972420_0db2004c584b33f187cdac1062bea109" style="background-image:url(https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/p75x225/10462682_1446814502241165_4923098771471614845_n.jpg?oh=139e8bfead3ae987c8f037b62731a206&amp;oe=54439427&amp;__gda__=1414377409_714072a6999693208c1c7165b82e789a)"></div></div>
+            <div id="photoContainer">
+            	<div ng-repeat="picture in singleTattooPhotosObj | limitTo : thumbLimit" class="big_thumb" style="background-image:url({{picture.images[picture.images.length-1].source}})">
+            	</div>
+            </div>
           </div>
         </div>
       </div>

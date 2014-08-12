@@ -8,7 +8,7 @@ angular.module('skinandInkApp')
       link: function link($scope, element, attrs, $log) {
       
       	
-
+  		
       	$scope.photos = [];
 
       	// initial image index
@@ -55,92 +55,102 @@ angular.module('skinandInkApp')
 		// I watch the expression in $scope context to
 		// see when it changes - and adjust the visibility
 		// of the element accordingly.
-		$scope.$watch(expression,function( newValue, oldValue ) {
+		CommonMain.getData().then( function(d) {
+		  // success
+		  //$scope.photos = [];
+		  if(d){
+		    $scope.$watch(expression,function( newValue, oldValue ) {
 
-		  	switch($scope.fbAlbum){
-		  		case 'studio':
-		  			fbAlbumId = 10152187799888838;
-		  		break;
-		  		case 'piercing':
-		  			fbAlbumId = 473296213837;
-		  		break;
-		  		default :
-		  			fbAlbumId = 10152187799888838;
-		  		break;
+		      	switch($scope.fbAlbum){
+		      		case 'studio':
+		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
+		      		break;
+		      		case 'piercing':
+		      			fbAlbumId = $scope.globalInfo.general.piercingFbAlbum;
+		      		break;
+		      		default :
+		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
+		      		break;
 
-		  		return fbAlbumId;
-		  	}
+		      		return fbAlbumId;
+		      	}
 
-		  	if ($scope.fbAlbum == 'close') {
-		  		// this controls the button to close the gallery
-		  		$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-		  		setTimeout(function(){
-		  			element.removeClass('slideInLeft').addClass('slideOutLeft');
-		  			setTimeout(function(){
-		  				element.hide();
-		  				$('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
-		  			},600);
-		  		},200);
-		  		return;
-		  	} else {
-		  		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
-		  			// success
-		  			$scope.photos = [];
-		  			if(d){
-		  				$scope.photosObjGallery = d.data;
-		  				for (var i=0; i<d.data.length; i++){
-		  					var ciao = {
-		  						src: d.data[i].images[0].source, 
-		  						thumb:d.data[i].images[d.data[i].images.length -1].source,
-		  						 desc:'boh'
-		  						}
-		  					$scope.photos.push(ciao);
-		  				}
-		  			}
-				}, function(d) {
-		  			// request rejected (error)
-		  			$scope.photosObjGallery = {};
-		  		});
-		  	}
-		  	
+		      	if ($scope.fbAlbum == 'close') {
+		      		// this controls the button to close the gallery
+		      		$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
+		      		setTimeout(function(){
+		      			element.removeClass('slideInLeft').addClass('slideOutLeft');
+		      			setTimeout(function(){
+		      				element.hide();
+		      				$('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
+		      			},600);
+		      		},200);
+		      		return;
+		      	} else {
+		      		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
+		      			// success
+		      			$scope.photos = [];
+		      			if(d){
+		      				$scope.photosObjGallery = d.data;
+		      				for (var i=0; i<d.data.length; i++){
+		      					var ciao = {
+		      						src: d.data[i].images[0].source, 
+		      						thumb:d.data[i].images[d.data[i].images.length -1].source,
+		      						 desc:'boh'
+		      						}
+		      					$scope.photos.push(ciao);
+		      				}
+		      			}
+		    		}, function(d) {
+		      			// request rejected (error)
+		      			$scope.photosObjGallery = {};
+		      		});
+		      	}
+		      	
 
-			// Ignore first-run values since we've
-			// already defaulted the element state.
-			if ( newValue === oldValue ) {
-				return;
-			}
-			// Show element.
-			if ( newValue ) {
-				$scope._Index = 0;
-				var body = $document.find('body').eq(0);
-				body.animate({scrollTop:0}, '500', 'swing', function() { 
-				   	$('#h').removeClass('slideInLeft').addClass('slideOutLeft');
-			     	setTimeout(function(){
-			     		$('#h').hide();
-			     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
-			     		setTimeout(function(){
-			     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
-			     		},200);	
-			     	},600);
-				});
+		    	// Ignore first-run values since we've
+		    	// already defaulted the element state.
+		    	if ( newValue === oldValue ) {
+		    		return;
+		    	}
+		    	// Show element.
+		    	if ( newValue ) {
+		    		$scope._Index = 0;
+		    		var body = $document.find('body').eq(0);
+		    		body.animate({scrollTop:0}, '500', 'swing', function() { 
+		    		   	$('#h').removeClass('slideInLeft').addClass('slideOutLeft');
+		    	     	setTimeout(function(){
+		    	     		$('#h').hide();
+		    	     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
+		    	     		setTimeout(function(){
+		    	     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+		    	     		},200);	
+		    	     	},600);
+		    		});
 
-			// Hide element.
-			} else {
-				
-				if(element.is(":visible")){
-					$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-					setTimeout(function(){
-						element.removeClass('slideInLeft').addClass('slideOutLeft');
-						setTimeout(function(){
-							element.removeClass('slideOutLeft').addClass('slideInLeft');
-							setTimeout(function(){
-								$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
-							},200);
-						},600);
-					},200);
-				} 
-			}
+		    	// Hide element.
+		    	} else {
+		    		
+		    		if(element.is(":visible")){
+		    			$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
+		    			setTimeout(function(){
+		    				element.removeClass('slideInLeft').addClass('slideOutLeft');
+		    				setTimeout(function(){
+		    					element.removeClass('slideOutLeft').addClass('slideInLeft');
+		    					setTimeout(function(){
+		    						$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
+		    					},200);
+		    				},600);
+		    			},200);
+		    		} 
+		    	}
+		    });
+		  }
+		}, function(d) {
+		  // request rejected (error)
+		  //$scope.globalInfo = {};
 		});
+
 	   }
     };
   });

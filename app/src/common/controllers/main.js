@@ -17,37 +17,7 @@ angular.module('skinandInkApp')
 
 	};
 
-  	CommonMain.getFBInfo(164903213837).then( function(d) {
-  		// success
-  		
-  		if(d){
-  			$scope.infoObj = d;
-			$log.debug('center', $scope.infoObj);
-			$scope.center = {
-				latitude: d.location.latitude,
-				longitude: d.location.longitude
-			}
-			$log.debug('center', $scope.center);
-			$scope.map.control.refresh($scope.center);
-  		}
-  	}, function(d) {
-  		// request rejected (error)
-  		$scope.infoObj = {};
-  	});
-
   	
-  	CommonMain.getFBPhotos(10152187799888838).then( function(d) {
-  		// success
-  		
-  		if(d){
-  			$scope.photosObj = d.data;
-			$log.debug('photos', $scope.photosObj);
-			
-  		}
-  	}, function(d) {
-  		// request rejected (error)
-  		$scope.photosObj = {};
-  	});
 
   	// I toggle the value of isVisible.
     $scope.toggleGallery = function(album) {
@@ -64,6 +34,49 @@ angular.module('skinandInkApp')
     $scope.galleryIsVisible = false;
 
     $scope.singleTattooIsVisible = false;
+
+    CommonMain.getData().then( function(d) {
+      // success
+      //$scope.photos = [];
+      if(d){
+        console.log(d);
+        $scope.globalInfo = d;
+        CommonMain.getFBInfo($scope.globalInfo.general.fbID).then( function(c) {
+          // success
+          
+          if(d){
+            $scope.infoObj = c;
+          $log.debug('center', $scope.infoObj);
+          $scope.center = {
+            latitude: c.location.latitude,
+            longitude: c.location.longitude
+          }
+          $log.debug('center', $scope.center);
+          $scope.map.control.refresh($scope.center);
+          }
+        }, function(c) {
+          // request rejected (error)
+          $scope.infoObj = {};
+        });
+
+        
+        CommonMain.getFBPhotos($scope.globalInfo.general.fbAlbum).then( function(c) {
+          // success
+          
+          if(c){
+            $scope.photosObj = c.data;
+          $log.debug('photos', $scope.photosObj);
+          
+          }
+        }, function(c) {
+          // request rejected (error)
+          $scope.photosObj = {};
+        });
+      }
+    }, function(d) {
+      // request rejected (error)
+      $scope.globalInfo = {};
+    });
 
   	
 
