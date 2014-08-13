@@ -13,12 +13,15 @@ angular.module('skinandInkApp')
 
     	      	$scope.thumbLimit = 6;
 
-    	      	$scope.nextTattoo = function(){
-    	      		$scope.tattooPosition += 1;
-    	      	}
+                $scope.cover_w = 851;
+                $scope.cover_h = 316;
+
+                $scope.nextTattoo = function(){
+    	      		$scope.tattooPosition < $scope.tattooProfilePic.length - 1 ? $scope.tattooPosition++ : $scope.tattooPosition = 0;
+                }
 
     	      	$scope.prevTattoo = function(){
-    	      		$scope.tattooPosition -= 1;
+    	      		$scope.tattooPosition > 0 ? $scope.tattooPosition-- : $scope.tattooPosition = $scope.tattooProfilePic.length - 1;
     	      	}
 
     	      	$scope.goToTattoo = function(indice){
@@ -27,7 +30,9 @@ angular.module('skinandInkApp')
 
     	      	$scope.updateFacebookCall = function(){
 	    	    
-	    	        CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fbID).then( function(c) {
+	    	        $scope.loaded = false;
+
+                    CommonMain.getFBInfo($scope.globalInfo.tattoo[$scope.tattooPosition].fbID).then( function(c) {
 		      	    	  // success
 		      	    	 
 		      	    	  	$scope.singleTattoInfoObj = c;
@@ -41,6 +46,9 @@ angular.module('skinandInkApp')
 		      	    	    // success
 		      	    	    if(a){
 		      	    	    	$scope.singleTattooPhotosObj = a.data;
+                                // set cover size
+                                $scope.setCoverSize();
+                                $scope.loaded = true;
 		      	    	    }
 		      	    	}, function(a) {
 		      	    	      // request rejected (error)
@@ -59,6 +67,7 @@ angular.module('skinandInkApp')
     	      	    	    // success
     	      	    	    if(b){
 								$scope.tattooProfilePic.push({'url': b.url, 'id': b.navPos, 'name': b.name});
+                                
     	      	    	    	//console.log(b.navPos);
     	      	    	    }
     	      	    	}, function(b) {
@@ -66,7 +75,7 @@ angular.module('skinandInkApp')
     	      	    	      $scope.singleTattooProfilePicObj = {}
     	      	    	});
 					}
-      	    	}
+                }
     	      	
     	      	$scope.$watch('tattooPosition',function(oldValue, newValue){
 
@@ -77,7 +86,24 @@ angular.module('skinandInkApp')
     	      		}
     	      	});
 
-    	      	
+    	      	$scope.setCoverSize = function (){
+                    var coverImgW = document.getElementById('fbCoverImg').width;
+                    var coverImgH= document.getElementById('fbCoverImg').height;
+                    var real_img_h = ($scope.cover_w * coverImgH / coverImgW) - $scope.cover_h;
+                    if (coverImgH <= $scope.cover_h){
+                        $scope.coverStyle = {
+                            'top': parseInt (real_img_h * $scope.singleTattoInfoObj.cover.offset_y / 100 * -1) + "px",
+                            'height': $scope.cover_h,
+                            'width': 'auto !important'
+                        }
+                    } else if (coverImgH > $scope.cover_h){
+                        $scope.coverStyle = {
+                            'top': parseInt (real_img_h * $scope.singleTattoInfoObj.cover.offset_y / 100 * -1) + "px" ,
+                            'width': $scope.cover_w,
+                            'height': 'auto !important'
+                        }
+                    }
+                }
     	      	   
     	      	    
 	      	    	
@@ -123,6 +149,8 @@ angular.module('skinandInkApp')
 						$scope.tattooProfilePic = [];
 						// reset tattoo position
 						$scope.tattooPosition = 0;
+                        
+
 						$scope.generalInfoLoaded = true;
 						$scope.createTattooThumb();
 						$scope.updateFacebookCall();

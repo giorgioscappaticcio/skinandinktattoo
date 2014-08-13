@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('skinandInkApp')
-  .controller('MainCtrl', function ($scope, $log, CommonMain) {
+  .controller('MainCtrl', function ($scope, $log, CommonMain, $window) {
   	
   	$scope.center = {
   		latitude: 0,
@@ -17,6 +17,10 @@ angular.module('skinandInkApp')
 
 	};
 
+  $scope.fullBgCover = {
+    'width' : $window.innerWidth + 'px',
+    'height' : $window.innerHeight + 'px'
+  }
   	
 
   	// I toggle the value of isVisible.

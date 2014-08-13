@@ -3,13 +3,14 @@
   
     <div class="single_header" id="single_header">
       <div class="back_home animated slideOutUp" ng-click="toggleTattoo('close')"><i class="fa fa-times"></i></div>
-      <div class="w-container fb_header">
-        <img class="fb_header_img" src="{{singleTattoInfoObj.cover.source}}" alt="">
+      <div class="w-container fb_header" >
+        <div class="loaderCont" ng-hide="loaded"><i class="fa fa-cog"></i></div>
+        <img class="fb_header_img" id="fbCoverImg" src="{{singleTattoInfoObj.cover.source}}" ng-style="coverStyle" ng-show="loaded">
       </div>
     </div>
 
     <div class="icon_nav_section" id="profile_icon_nav">
-      <div class="arrow left hide" id="left_arrow">&lt;</div>
+      <div class="arrow left" id="left_arrow" ng-click="prevTattoo()" ng-hide="tattooPosition == 0">&lt;</div>
       <div class="w-container icon_nav">
       	<!-- <div class="circle_thumb" ng-click="goToTattoo($index)" ng-repeat="profilePicUrl in tattooProfilePic track by $index | orderBy:'id'" ng-class="{'selected': $index == tattooPosition}">
       		<!-- <img src="{{profilePicUrl.name}}" /> --> 
@@ -18,11 +19,12 @@
       		<img src="{{profilePicUrl.url}}"/>
       	</div>
       </div>
-      <div class="arrow right" id="right_arrow" ng-click="nextTattoo()">&gt;</div>
+      <div class="arrow right" id="right_arrow" ng-click="nextTattoo()" ng-hide="tattooPosition == tattooProfilePic.length-1">&gt;</div>
     </div>
 
     <div class="section" id="single">
       <div class="w-container">
+        <!-- <div class="w-row loader" ng-hide="loaded"><i class="fa fa-cog"></i></div> -->
         <div class="w-row">
           <div class="w-col w-col-5 left_col">
             <h1>{{singleTattoInfoObj.name}}</h1>
@@ -39,4 +41,9 @@
       </div>
     </div>
 
+  </div>
+  <div class="bigLoader" ng-hide="loaded" ng-style="fullBgCover">
+    <div class="loaderCenter">
+      <i class="fa fa-cog"></i>
+    </div>
   </div>
