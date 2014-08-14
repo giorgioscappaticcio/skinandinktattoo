@@ -107,7 +107,17 @@ angular.module('skinandInkApp')
     	      	   
     	      	    
 	      	    	
-		      	    	
+		      	$scope.closePanel = function(){
+                    $('.back_home').removeClass('slideInDown').addClass('slideOutUp');
+                    setTimeout(function(){
+                        element.removeClass('slideInLeft').addClass('slideOutLeft');
+                        setTimeout(function(){
+                            element.hide();
+                            $('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
+                            $scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+                        },600);
+                    },200); 
+                } 	
 	      	    	
 	      	    	
     	      	 
