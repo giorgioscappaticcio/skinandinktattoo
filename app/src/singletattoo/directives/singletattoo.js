@@ -155,6 +155,7 @@ angular.module('skinandInkApp')
     				}
     				// Show element.
     				if ( newValue ) {
+
 						//reset thumb image array
 						$scope.tattooProfilePic = [];
 						// reset tattoo position
@@ -165,15 +166,23 @@ angular.module('skinandInkApp')
 						$scope.createTattooThumb();
 						$scope.updateFacebookCall();
 						$scope._Index = 0;
+
+                        if ($scope.galleryIsVisible){
+                            var elementToHide = $('div[gallerypopup="galleryIsVisible"]');
+                            $scope.galleryIsVisible = ! $scope.galleryIsVisible;
+                        } else {
+                            var elementToHide = $('#h');
+                        }
 						var body = $document.find('body').eq(0);
 						body.animate({scrollTop:0}, '500', 'swing', function() { 
-						   	$('#h').removeClass('slideInLeft').addClass('slideOutLeft');
+						   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 					     	setTimeout(function(){
-					     		$('#h').hide();
+					     		elementToHide.hide();
 					     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
 					     		setTimeout(function(){
 					     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');
-					     		},200);	
+					     		},200);
+
 					     	},600);
 						});
     					return;

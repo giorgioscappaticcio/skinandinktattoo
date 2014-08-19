@@ -34,6 +34,24 @@ angular.module('skinandInkApp')
       	    $scope._Index = index;
       	};
 
+      	$scope.closeGallery = function(){
+            if ($scope.singleTattooIsVisible){
+            	var elementToShow = $('div[singletattoo="singleTattooIsVisible"]');
+            } else {
+            	var elementToShow = $('#h');
+            }
+            
+            $('.back_home').removeClass('slideInDown').addClass('slideOutUp');
+            setTimeout(function(){
+                element.removeClass('slideInLeft').addClass('slideOutLeft');
+                setTimeout(function(){
+                    element.hide();
+                    elementToShow.show().removeClass('slideOutLeft').addClass('slideInLeft');
+                },600);
+                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
+            },200); 
+        }
+
 
       	//$scope.windowHeight = (window.innerHeight - 80) + 'px';
       	$scope.windowHeight = (window.innerHeight - 220) + 'px';
@@ -68,6 +86,9 @@ angular.module('skinandInkApp')
 		      		case 'piercing':
 		      			fbAlbumId = $scope.globalInfo.general.piercingFbAlbum;
 		      		break;
+		      		case 'tattoo':
+		      			fbAlbumId = $scope.globalInfo.tattoo[$scope.tattooPosition].fbAlbum;
+		      		break;
 		      		default :
 		      			fbAlbumId = $scope.globalInfo.general.fbAlbum;
 		      		break;
@@ -75,37 +96,26 @@ angular.module('skinandInkApp')
 		      		return fbAlbumId;
 		      	}
 
-		      	if ($scope.fbAlbum == 'close') {
-		      		// this controls the button to close the gallery
-		      		$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
-		      		setTimeout(function(){
-		      			element.removeClass('slideInLeft').addClass('slideOutLeft');
-		      			setTimeout(function(){
-		      				element.hide();
-		      				$('#h').show().removeClass('slideOutLeft').addClass('slideInLeft');
-		      			},600);
-		      		},200);
-		      		return;
-		      	} else {
-		      		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
-		      			// success
-		      			$scope.photos = [];
-		      			if(d){
-		      				$scope.photosObjGallery = d.data;
-		      				for (var i=0; i<d.data.length; i++){
-		      					var ciao = {
-		      						src: d.data[i].images[0].source, 
-		      						thumb:d.data[i].images[d.data[i].images.length -1].source,
-		      						 desc:'boh'
-		      						}
-		      					$scope.photos.push(ciao);
-		      				}
-		      			}
-		    		}, function(d) {
-		      			// request rejected (error)
-		      			$scope.photosObjGallery = {};
-		      		});
-		      	}
+	      		
+	      		CommonMain.getFBPhotos(fbAlbumId).then( function(d) {
+	      			// success
+	      			$scope.photos = [];
+	      			if(d){
+	      				$scope.photosObjGallery = d.data;
+	      				for (var i=0; i<d.data.length; i++){
+	      					var ciao = {
+	      						src: d.data[i].images[0].source, 
+	      						thumb:d.data[i].images[d.data[i].images.length -1].source,
+	      						 desc:'boh'
+	      						}
+	      					$scope.photos.push(ciao);
+	      				}
+	      			}
+	    		}, function(d) {
+	      			// request rejected (error)
+	      			$scope.photosObjGallery = {};
+	      		});
+		      	
 		      	
 
 		    	// Ignore first-run values since we've
@@ -115,12 +125,18 @@ angular.module('skinandInkApp')
 		    	}
 		    	// Show element.
 		    	if ( newValue ) {
+		    		if ($scope.singleTattooIsVisible){
+		    			var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
+		    			$scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+		    		} else {
+		    			var elementToHide = $('#h');
+		    		}
 		    		$scope._Index = 0;
 		    		var body = $document.find('body').eq(0);
 		    		body.animate({scrollTop:0}, '500', 'swing', function() { 
-		    		   	$('#h').removeClass('slideInLeft').addClass('slideOutLeft');
+		    		   	elementToHide.removeClass('slideInLeft').addClass('slideOutLeft');
 		    	     	setTimeout(function(){
-		    	     		$('#h').hide();
+		    	     		elementToHide.hide();
 		    	     		element.show().removeClass('slideOutLeft').addClass('slideInLeft');
 		    	     		setTimeout(function(){
 		    	     			$('.back_home').removeClass('slideOutUp').addClass('slideInDown');

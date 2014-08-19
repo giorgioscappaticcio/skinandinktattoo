@@ -1,37 +1,3 @@
-<!-- <div id="imgGallery" class="animated" style="position: relative;">
-	<div id="grid-gallery" class="grid-gallery">
-		<section class="grid-wrap" style="min-height:{{windowHeight}}">
-			<ul class="grid" style="position: relative;">
-				<li class="grid-sizer" style="position: absolute; left: 0px; top: 0px;"></li>
-				<li ng-repeat="photo in photosObjGallery">
-					<figure>
-						<img src="{{photo.images[photo.images.length -1].source}}">
-					</figure>
-				</li> -->
-				<!-- for Masonry column width -->
-		<!-- 	</ul>
-		</section>
-		<section class="slideshow" style="height:{{fullHeight}}; top:{{scroll}}">
-			<ul>
-				<li ng-repeat="photo in photosObjGallery">
-					<figure>
-						<img src="{{photo.images[0].source}}" />
-					</figure> 
-				</li>
-			</ul>
-			<nav>
-				<span class="icon nav-prev"><i class="fa fa-caret-left"></i></span>
-				<span class="icon nav-next"><i class="fa fa-caret-right"></i></span>
-				<span class="icon nav-close"><i class="fa fa-times"></i></span>
-			</nav>
-			<div class="info-keys icon">Navigate with arrow keys</div>
-		</section>
-	</div>
-	<div class="back_home animated slideOutUp" ng-click="toggle('close')"><i class="fa fa-times"></i></div>
-</div> -->
-
-
-
 <!-- slider container -->
 	<div class="w-container">
 		<div class="w-row">
@@ -53,4 +19,4 @@
         	</ul>
         </div>
 	</div>
-   	<div class="back_home animated slideOutUp" ng-click="toggleGallery('close')"><i class="fa fa-times"></i></div>
+   	<div class="back_home animated slideOutUp" ng-click="closeGallery()"><i class="fa fa-times"></i></div>

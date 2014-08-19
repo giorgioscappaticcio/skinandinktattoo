@@ -18,8 +18,8 @@ angular.module('skinandInkApp')
 	};
 
   $scope.fullBgCover = {
-    'width' : $window.innerWidth + 'px',
-    'height' : $window.innerHeight + 'px'
+    'width' : '100%',//$window.innerWidth + 'px',
+    'height' : '100%'//$window.innerHeight + 'px'
   }
   	
 
@@ -68,7 +68,7 @@ angular.module('skinandInkApp')
           
           if(c){
             $scope.photosObj = c.data;
-          $log.debug('photos', $scope.photosObj);
+            $log.debug('photos', $scope.photosObj);
           
           }
         }, function(c) {
