@@ -169,7 +169,9 @@ angular.module('skinandInkApp')
 
                         if ($scope.galleryIsVisible){
                             var elementToHide = $('div[gallerypopup="galleryIsVisible"]');
-                            $scope.galleryIsVisible = ! $scope.galleryIsVisible;
+                            setTimeout(function(){
+                                $scope.galleryIsVisible = ! $scope.galleryIsVisible;
+                            },700);
                         } else {
                             var elementToHide = $('#h');
                         }

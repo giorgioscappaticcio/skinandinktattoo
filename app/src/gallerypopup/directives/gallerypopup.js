@@ -35,11 +35,7 @@ angular.module('skinandInkApp')
       	};
 
       	$scope.closeGallery = function(){
-            if ($scope.singleTattooIsVisible){
-            	var elementToShow = $('div[singletattoo="singleTattooIsVisible"]');
-            } else {
-            	var elementToShow = $('#h');
-            }
+            var elementToShow = $('#h');
             
             $('.back_home').removeClass('slideInDown').addClass('slideOutUp');
             setTimeout(function(){
@@ -51,6 +47,29 @@ angular.module('skinandInkApp')
                 $scope.galleryIsVisible = ! $scope.galleryIsVisible;
             },200); 
         }
+
+    	$scope.backToTattoo = function(){
+          
+			var elementToShow = $('div[singletattoo="singleTattooIsVisible"]');
+          
+			$('.back_home').removeClass('slideInDown').addClass('slideOutUp');
+    		setTimeout(function(){
+        		element.removeClass('slideInLeft').addClass('slideOutLeft');
+          		setTimeout(function(){
+            		element.hide();
+            		elementToShow.show().removeClass('slideOutLeft').addClass('slideInLeft');
+        		},600);
+          		$scope.galleryIsVisible = ! $scope.galleryIsVisible;
+    		},200); 
+      	}
+
+      	$scope.closeBtn = function(){
+      		if ($scope.fbAlbum == 'tattoo'){
+      			$scope.backToTattoo();
+      		} else {
+      			$scope.closeGallery();
+      		}
+      	}
 
 
       	//$scope.windowHeight = (window.innerHeight - 80) + 'px';
@@ -127,7 +146,10 @@ angular.module('skinandInkApp')
 		    	if ( newValue ) {
 		    		if ($scope.singleTattooIsVisible){
 		    			var elementToHide = $('div[singletattoo="singleTattooIsVisible"]');
-		    			$scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+		    			setTimeout(function(){
+		    				$scope.singleTattooIsVisible = ! $scope.singleTattooIsVisible;
+		    			},700);
+		    			
 		    		} else {
 		    			var elementToHide = $('#h');
 		    		}

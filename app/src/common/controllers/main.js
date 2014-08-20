@@ -25,7 +25,6 @@ angular.module('skinandInkApp')
 
   	// I toggle the value of isVisible.
     $scope.toggleGallery = function(album) {
-
         $scope.galleryIsVisible = ! $scope.galleryIsVisible;
         $scope.fbAlbum = album;
     };
